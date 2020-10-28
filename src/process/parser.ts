@@ -1,16 +1,8 @@
-import { EntityNode } from "../types";
-import { Relation } from "../ui/Relation";
-import { compile } from "./compile";
 import ts from 'typescript';
 import {ColumnType} from "typeorm";
-import {isObject} from "../validate";
-
-type ParseResult = {
-    name: string;
-    columns: EntityNode.EntityColumn[];
-    indexes: EntityNode.EntityIndex[];
-    relations: Relation[];
-}
+import { ParseResult } from "../types";
+import { compile } from "./compile";
+import { isObject } from '../helpers';
 
 // @ts-ignore
 const SyntaxKindToTypeMap: Record<ts.SyntaxKind, ColumnType> = {
@@ -48,7 +40,7 @@ export class Parser {
                             dataType: SyntaxKindToTypeMap[member.type!.kind],
                         })
                     }
-                })
+                });
 
                 // deal with decorators
                 node.decorators?.forEach(decorator => {

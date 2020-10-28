@@ -1,4 +1,5 @@
 import { ColumnType } from 'typeorm';
+import {Relation} from "../ui";
 
 export namespace EntityNode {
     export type EntityColumn = {
@@ -12,3 +13,10 @@ export namespace EntityNode {
     };
 }
 
+
+export type ParseResult = {
+    name: string;
+    columns: EntityNode.EntityColumn[];
+    indexes: EntityNode.EntityIndex[];
+    relations: Relation[];
+}
